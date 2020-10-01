@@ -31,3 +31,10 @@ for linha in linhas:
         id_para_linha[_linha[0]] = _linha[4]
         
 #criação de uma lista com todas as conversas
+conversas_id = []
+for conversa in conversas[:-1]:
+    #print(conversa)
+    _conversa = conversa.split(' +++$+++ ') [-1][1:-1].replace("'", "").replace(" ", "") #pegar somente a última coluna / replace para escluir as aspas e o espaço
+    #print(_conversa)
+    conversas_id.append(_conversa.split(','))
+    
