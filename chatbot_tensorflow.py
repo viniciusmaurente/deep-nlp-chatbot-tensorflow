@@ -80,7 +80,7 @@ for resposta in respostas:
     
 #criação de um dicionário que mapeia cada palavra e o número de ocorrências
 #codificação da contagem das palavras que não são frequentes
-palavras_contagem = {}
+palavras_contagem = {}  #inicializando com vazio
 for pergunta in perguntas_limpas:
     #print(pergunta)
     for palavra in pergunta.split():  #verificando se a palavra existe
@@ -88,6 +88,16 @@ for pergunta in perguntas_limpas:
             palavras_contagem[palavra] = 1
         else:
             palavras_contagem[palavra] += 1
+            
+            
+for resposta in respostas_limpas:
+    for resposta in resposta.split():  #verificando se a palavra existe
+        if palavra not in palavras_contagem:
+            palavras_contagem[palavra] = 1
+        else:
+            palavras_contagem[palavra] += 1
+            
+            
         
         
     
