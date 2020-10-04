@@ -79,7 +79,8 @@ for resposta in respostas:
     respostas_limpas.append(limpa_texto(resposta))
     
 #criação de um dicionário que mapeia cada palavra e o número de ocorrências
-#codificação da contagem das palavras que não são frequentes
+#codificação da contagem das palavras que não são frequentes -. biblioteca NLTK
+
 palavras_contagem = {}  #inicializando com vazio
 for pergunta in perguntas_limpas:
     #print(pergunta)
@@ -91,17 +92,30 @@ for pergunta in perguntas_limpas:
             
             
 for resposta in respostas_limpas:
-    for resposta in resposta.split():  #verificando se a palavra existe
+    for resposta in resposta.split():  
         if palavra not in palavras_contagem:
             palavras_contagem[palavra] = 1
         else:
             palavras_contagem[palavra] += 1
             
-            
-        
-        
-    
-   
+
+# Remoção de palavras não frequentes e tokenização (dois dicionários)
+limite = 20
+perguntas_palavras_int = {}
+numero_palavra = 0
+for palavra, contagem in palavras_contagem.items():
+    #print(palavra)
+    #print(contagem)
+    if contagem >= limite:
+        perguntas_palavras_int[palavra] = numero_palavra
+        numero_palavra += 1
+
+respostas_palavras_int = {}
+numero_palavra = 0
+for palavra, contagem in palavras_contagem.items():
+    if contagem >= limite:
+        respostas_palavras_int[palavra] = numero_palavra
+        numero_palavra += 1
 
 
         
