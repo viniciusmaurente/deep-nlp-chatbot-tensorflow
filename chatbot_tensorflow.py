@@ -118,4 +118,16 @@ for palavra, contagem in palavras_contagem.items():
         numero_palavra += 1
 
 
-        
+# Adição de tokens no dicionário
+tokens = ['<PAD>', '<EOS>', '<OUT>', '<SOS>']
+for token in tokens:
+    perguntas_palavras_int[token] = len(perguntas_palavras_int) + 1
+for token in tokens:
+    respostas_palavras_int[token] = len(respostas_palavras_int) + 1
+
+# Criação do dicionário inverso com o dicionário de respostas
+respostas_int_palavras = {p_i: p for p, p_i in respostas_palavras_int.items()}
+
+# Adição do token final de string <EOS> para o final de cada resposta
+for i in range(len(respostas_limpas)):
+    respostas_limpas[i] += ' <EOS>'
