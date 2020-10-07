@@ -187,7 +187,7 @@ def entradas_modelo():
 def preprocessamento_saidas(saidas, palavra_para_int, batch_size):
     esquerda = tf.fill([batch_size, 1], palavra_para_int['<SOS>'])
     direita = tf.strided_slice(saidas, [0,0], [batch_size, -1], strides = [1,1]) #pega da primeira até a ante penultima -1 vai pegar palavra por palavra
-    saidas_preprocessadas = tf.concat([esquerda, direita], 1)#concatenação vertical 1
+    saidas_preprocessadas = tf.concat([esquerda, direita], 1) #concatenação vertical 1
     return saidas_preprocessadas
 
 # Criação da camada  RNN do codificador
@@ -208,7 +208,7 @@ def decodifica_base_treinamento(encoder_estado, decodificador_celula,
                                 decodificador_embedded_entrada, tamanho_sequencia,
                                 decodificador_escopo, funcao_saida,
                                 keep_prob, batch_size):
-    estados_atencao = tf.zeros([batch_size, 1, decodificador_celula.output_size])
+    estados_atencao = tf.zeros([batch_size, 1, decodificador_celula.output_size])                           #mecanismo de atenção  
     attention_keys, attention_values, attention_score_function, attention_construct_function = tf.contrib.seq2seq.prepare_attention(estados_atencao,
                                                                                                                                     attention_option = 'bahdanau',
                                                                                                                                     num_units = decodificador_celula.output_size)
@@ -238,7 +238,7 @@ def decodifica_base_teste(encoder_estado, decodificador_celula,
     funcao_decodificador_teste = tf.contrib.seq2seq.attention_decoder_fn_inference(funcao_saida,
                                                                                    encoder_estado[0],
                                                                                    attention_keys, 
-                                                                                  attention_values, 
+                                                                                   attention_values, 
                                                                                    attention_score_function, 
                                                                                    attention_construct_function,
                                                                                    decodificador_embedding_matrix,
@@ -316,6 +316,5 @@ def modelo_seq2seq(entradas, saidas, keep_prob, batch_size, tamanho_sequencia,
                                                                perguntas_palavras_int,
                                                                keep_prob,
                                                                batch_size)
-    return previsoes_treinamento, previsoes_teste            
-            
+    return previsoes_treinamento, previsoes_teste             
             
